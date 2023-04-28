@@ -72,12 +72,36 @@ main .container .right{
     width: 100%;
     height: 50px;
     margin: 10px 0;
-    padding: 0 20px;
+    /* padding: 0 20px; */
+    padding-left: 30px;
     font-size: 22px;
     outline: 0;
     border-radius: 8px;
     border: 2px solid rgb(180, 176, 176);
 }
+.right .form_box .input_box{
+    position: relative;
+}
+
+.right .form_box form i{
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    left: 10px;
+    /* color: green; */
+    font-size: 20px;
+}
+
+
+.right .form_box form .input_box .tog{
+    position: absolute;
+    top: 50%;
+    left: 100%;
+    transform: translate(-127%, -50%);
+    /* color: green; */
+    font-size: 20px;
+}
+
 
 .right .form_box form input:focus{
     border: 2px solid green;
@@ -93,8 +117,23 @@ main .container .right{
     font-weight: bold;
     color: white;
     cursor: pointer;
+    /* pointer-events: all; */
 }
 
 #form_register{
     display: none;
+}
+
+.msg_body{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    background-color: #ed9090;
+    border: 2px solid #d93030;
+    border-radius: 8px;
+    color: white;
+    font-weight: bold;
+    font-size: 22px;
+    height: 50px;
 }

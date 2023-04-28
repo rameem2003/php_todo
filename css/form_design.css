@@ -1,0 +1,72 @@
+.form_box{
+    background-color: white;
+    padding: 10px;
+    border-radius: 8px;
+    /* height: 50px; */
+    width: 40%;
+    position: absolute;
+    top: -200%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    /* transform: translateX(-50%); */
+    transition: 0.5s linear;
+}
+
+.form_box.form_show{
+    top: 50%;
+    /* transform: translateY(-50%); */
+}
+.form_box form {
+    box-sizing: border-box;
+}
+ .form_box form input{
+    width: 100%;
+    height: 50px;
+    margin: 10px 0;
+    /* padding: 0 20px; */
+    padding-left: 30px;
+    font-size: 22px;
+    outline: 0;
+    border-radius: 8px;
+    border: 2px solid rgb(180, 176, 176);
+}
+ .form_box .input_box{
+    position: relative;
+}
+
+ .form_box form i{
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    left: 10px;
+    /* color: green; */
+    font-size: 20px;
+}
+
+
+ .form_box form .input_box .tog{
+    position: absolute;
+    top: 50%;
+    left: 100%;
+    transform: translate(-127%, -50%);
+    /* color: green; */
+    font-size: 20px;
+}
+
+
+ .form_box form input:focus{
+    border: 2px solid green;
+}
+
+ .form_box form button{
+    width: 100%;
+    height: 50px;
+    background-color: green;
+    border: none;
+    outline: none;
+    font-size: 22px;
+    font-weight: bold;
+    color: white;
+    cursor: pointer;
+    /* pointer-events: all; */
+}

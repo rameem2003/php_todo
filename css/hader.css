@@ -1,5 +1,6 @@
 header{
     background-color: transparent;
+    position: relative;
 }
 
 header .container{
@@ -40,4 +41,24 @@ header .container .menu ul li a {
     color: white;
     font-size: 22px;
     font-weight: bold;
+}
+
+header .sub_menu_open{
+    position: absolute;
+    background-color: white;
+    padding: 20px;
+    top: 80px;
+    right: 80px;
+    color: black;
+    display: block !important;
+    border-radius: 8px;
+    visibility: hidden;
+}
+
+header .sub_menu_open.active {
+    visibility: visible;
+}
+
+header .menu .sub_menu_open li a{
+    color: black !important;
 }
