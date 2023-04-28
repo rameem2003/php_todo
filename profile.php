@@ -19,6 +19,42 @@ if (isset($_GET['logout'])) {
     header('location:./');
 }
 
+
+// update user account
+if (isset($_POST['update'])) {
+    $new_f_name = $_POST['up_f_name'];
+    $new_l_name = $_POST['up_l_name'];
+    // $new_email = $_POST['up_new_email'];
+    $old_pass = $_POST['old_pass'];
+    $check_pass = $_POST['check_pass'];
+
+    $new_pass = $_POST['new_pass'];
+
+    if ($old_pass == $check_pass) {
+        // $existing_user = "SELECT * FROM `user_account` WHERE email = '$new_email'";
+
+        // $existing_user_query = mysqli_query($conn, $existing_user);
+
+        // if (mysqli_num_rows($existing_user_query) > 0) {
+        //     $msg[] = "Registration failed. Email alredy exist";
+        // }else{
+        //     $update_query = "UPDATE `user_account` SET f_name='$new_f_name', l_name='$new_l_name', password='$new_pass' WHERE id = '$user_id'";
+
+        //     mysqli_query($conn, $update_query);
+        // }
+
+        $update_query = "UPDATE `user_account` SET f_name='$new_f_name', l_name='$new_l_name', password='$new_pass' WHERE id = '$user_id'";
+
+        mysqli_query($conn, $update_query);
+
+        session_destroy();
+        unset($user_id);
+        header('location:./');
+    } else {
+        $msg[] = "Your password isnot correct. Try again";
+    }
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -41,6 +77,8 @@ if (isset($_GET['logout'])) {
 
     <?php include './header.php' ?>
 
+
+    <!-- form for update user account -->
     <div class="form_box" id="edit_form">
         <h1>Update Profile</h1>
         <?php
@@ -53,21 +91,29 @@ if (isset($_GET['logout'])) {
 
         ?>
 
-        <form action="" method="post">
+        <form action="" method="post" id="user_update_form">
             <div class="input_box">
-                <input type="text" name="f_name" id="" placeholder="First Name" required>
+                <input type="text" name="up_f_name" id="" placeholder="First Name" required value="<?php echo $row['f_name'] ?>">
                 <i class="fa-solid fa-user"></i>
             </div>
             <div class="input_box">
-                <input type="text" name="l_name" id="" placeholder="Last Name" required>
+                <input type="text" name="up_l_name" id="" placeholder="Last Name" required value="<?php echo $row['l_name'] ?>">
                 <i class="fa-solid fa-user"></i>
             </div>
             <div class="input_box">
-                <input type="email" name="new_email" id="" placeholder="Email" required>
+                <input type="email" name="up_new_email" id="" placeholder="Email" required value="<?php echo $row['email'] ?>" readonly>
                 <i class="fa-solid fa-envelope"></i>
             </div>
+
             <div class="input_box">
-                <input type="password" name="new_pass" id="new_pass" placeholder="Create Password" required>
+                <input type="password" name="old_pass" id="old_pass" placeholder="Enter Old Password" required>
+                <i class="fa-solid fa-lock"></i>
+            </div>
+
+            <input type="hidden" name="check_pass" value="<?php echo $row['password'] ?>">
+
+            <div class="input_box">
+                <input type="password" name="new_pass" id="new_pass" placeholder="Create New Password" required>
                 <i class="fa-solid fa-lock"></i>
                 <i class="fa-solid fa-eye tog" id="new_pass_tog"></i>
             </div>
@@ -81,6 +127,59 @@ if (isset($_GET['logout'])) {
             <button type="submit" name="update" id="actionBtn">Update</button>
         </form>
     </div>
+
+
+    <!-- todo form -->
+    <div class="form_box" id="edit_form">
+        <h1>Add your todo</h1>
+        <!-- <?php
+
+        if (isset($msg)) {
+            foreach ($msg as $msg) {
+                echo '<div class="msg_body">' . $msg . '</div>';
+            }
+        }
+
+        ?> -->
+
+        <form action="" method="post" id="user_update_form">
+            <div class="input_box">
+                <input type="text" name="up_f_name" id="" placeholder="First Name" required value="<?php echo $row['f_name'] ?>">
+                <i class="fa-solid fa-file-check"></i>
+            </div>
+            <div class="input_box">
+                <input type="text" name="up_l_name" id="" placeholder="Last Name" required value="<?php echo $row['l_name'] ?>">
+                <i class="fa-solid fa-user"></i>
+            </div>
+            <div class="input_box">
+                <input type="email" name="up_new_email" id="" placeholder="Email" required value="<?php echo $row['email'] ?>" readonly>
+                <i class="fa-solid fa-envelope"></i>
+            </div>
+
+            <div class="input_box">
+                <input type="password" name="old_pass" id="old_pass" placeholder="Enter Old Password" required>
+                <i class="fa-solid fa-lock"></i>
+            </div>
+
+            <input type="hidden" name="check_pass" value="<?php echo $row['password'] ?>">
+
+            <div class="input_box">
+                <input type="password" name="new_pass" id="new_pass" placeholder="Create New Password" required>
+                <i class="fa-solid fa-lock"></i>
+                <i class="fa-solid fa-eye tog" id="new_pass_tog"></i>
+            </div>
+
+            <div class="input_box">
+                <input type="password" name="con_new_pass" id="con_new_pass" placeholder="Confirm New Password" required>
+                <i class="fa-solid fa-lock"></i>
+                <i class="fa-solid fa-eye tog" id="con_new_pass_tog"></i>
+            </div>
+
+            <button type="submit" name="update" id="actionBtn">Update</button>
+        </form>
+    </div>
+
+
 
     <script src="./js/script.js"></script>
     <script>
