@@ -1,5 +1,4 @@
 <?php
-
 include './configuration/configuration.php';
 session_start();
 
@@ -13,14 +12,6 @@ if (mysqli_num_rows($run_load_user) > 0) {
     $row = mysqli_fetch_assoc($run_load_user);
     $user_email = $row['email'];
 }
-
-// logout
-if (isset($_GET['logout'])) {
-    session_destroy();
-    unset($user_id);
-    header('location:./');
-}
-
 
 // update user account
 if (isset($_POST['update'])) {
@@ -57,27 +48,27 @@ if (isset($_POST['update'])) {
     }
 }
 
-// upload todo
-if (isset($_POST['upload'])) {
-    $todo_title = $_POST['todo_title'];
-    $todo_desc = $_POST['todo_desc'];
-    $date = $_POST['date'];
-    $email = $row['email'];
-
-    $upload_todo = "INSERT INTO `todo_table`(user_email, todo_title, todo_desc, todo_date) VALUES ('$email','$todo_title','$todo_desc', '$date')";
-
-    mysqli_query($conn, $upload_todo);
+// logout
+if (isset($_GET['logout'])) {
+    session_destroy();
+    unset($user_id);
+    header('location:./');
 }
 
-// delete todo
-if(isset($_GET['dlTodo'])){
-    $todoId = $_GET['dlTodo'];
-    $delete_todo = "DELETE FROM `todo_table` WHERE id = '$todoId'";
-    mysqli_query($conn, $delete_todo);
+
+// get the todo
+$todo_id = $_GET['upTodo'];
+
+$todo_query = "SELECT * FROM `todo_table` WHERE id = '$todo_id'";
+
+$todo_query_run = mysqli_query($conn, $todo_query);
+
+if(mysqli_num_rows($todo_query_run) > 0){
+    $view_todo = mysqli_fetch_assoc($todo_query_run);
 }
+
 
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -85,7 +76,7 @@ if(isset($_GET['dlTodo'])){
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><?php echo $row['f_name'] . " " . $row['l_name'] ?></title>
+    <title><?php echo $row['f_name'] . " " . $row['l_name'] ?> || Update TODO</title>
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
@@ -93,6 +84,13 @@ if(isset($_GET['dlTodo'])){
     <link rel="stylesheet" href="./css/style.css">
     <link rel="stylesheet" href="./css/form_design.css">
     <link rel="stylesheet" href="./css/todo.css">
+
+    <style>
+        #todo_form{
+            top: 50%!important;
+            z-index: 1;
+        }
+    </style>
 </head>
 
 <body>
@@ -166,175 +164,24 @@ if(isset($_GET['dlTodo'])){
 
         <form action="" method="post" id="">
             <div class="input_box">
-                <input type="text" name="todo_title" id="" placeholder="TODO Title" required>
+                <input type="text" name="todo_title" id="" placeholder="TODO Title" value="<?php echo $view_todo['todo_title'] ?>" required>
                 <i class="fa-solid fa-file-check"></i>
             </div>
 
             <div class="input_box">
-                <textarea name="todo_desc" placeholder="Write Your Todo" id="" cols="30" rows="10" required></textarea>
+                <textarea name="todo_desc" placeholder="Write Your Todo" id="" cols="30" rows="10" value="<?php echo $view_todo['todo_desc'] ?>" required></textarea>
             </div>
 
             <div class="input_box">
-                <input type="date" name="date" id="" value="<?php echo date("Y-m-d"); ?>">
+                <input type="date" name="date" id="" value="<?php echo $view_todo['todo_date'] ?>">
             </div>
 
 
 
 
-            <button type="submit" name="upload" id="actionBtn">Upload Todo</button>
+            <button type="submit" name="upload" id="actionBtn">Update TODO</button>
         </form>
     </div>
-
-
-    <!-- todo list -->
-    <section class="todo_list">
-        <button id="add_todo"><i class="fa-solid fa-plus"></i></button>
-        <!-- <div class="add_new_todo_screen">
-            <div class="plus">
-                <i class="fa-solid fa-plus"></i>
-            </div>
-
-            <h1>Add New Todo</h1>
-        </div> -->
-
-        <?php
-
-        // show all todos in ui
-
-        $show_todo = "SELECT * FROM `todo_table` WHERE user_email = '$user_email'";
-        $show_todo_query = mysqli_query($conn, $show_todo);
-
-        if (mysqli_num_rows($show_todo_query) > 0) {
-            while ($todo_row = mysqli_fetch_assoc($show_todo_query)) {
-        ?>
-                <div class="todo">
-                    <div class="head">
-                        <div class="tile">
-                            <h3><?php echo $todo_row['todo_title'] ?></h3>
-                        </div>
-                        <div class="action">
-                            <a href="./profile.php?dlTodo=<?php echo $todo_row['id'] ?>"><i class="fa-solid fa-trash"></i></a>
-                            <a href="./updateTodo.php?upTodo=<?php echo $todo_row['id'] ?>"><i class="fa-solid fa-pen"></i></a>
-                        </div>
-                    </div>
-
-                    <div class="todo_desc">
-                        <p><?php echo $todo_row['todo_desc'] ?></p>
-                    </div>
-
-                    <p>Time: <?php echo $todo_row['todo_date'] ?></p>
-                </div>
-        <?php
-            }
-        } else {
-            echo "
-            <div class='add_new_todo_screen'>
-            <div class='plus'>
-                <i class='fa-solid fa-plus'></i>
-            </div>
-
-            <h1>Add New Todo</h1>
-        </div>
-            ";
-        }
-
-        ?>
-
-
-        <!-- <div class="todo">
-            <div class="head">
-                <div class="tile">
-                    <h3>Todo Title</h3>
-                </div>
-                <div class="action">
-                    <a href="#"><i class="fa-solid fa-trash"></i></a>
-                    <a href="#"><i class="fa-solid fa-pen"></i></a>
-                </div>
-            </div>
-
-            <div class="todo_desc">
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Commodi autem repudiandae ducimus harum alias iure molestias neque. Unde, sunt recusandae.</p>
-            </div>
-
-            <p>Time: </p>
-        </div>
-
-        <div class="todo">
-            <div class="head">
-                <div class="tile">
-                    <h3>Todo Title</h3>
-                </div>
-                <div class="action">
-                    <a href="#"><i class="fa-solid fa-trash"></i></a>
-                    <a href="#"><i class="fa-solid fa-pen"></i></a>
-                </div>
-            </div>
-
-            <div class="todo_desc">
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Commodi autem repudiandae ducimus harum alias iure molestias neque. Unde, sunt recusandae.</p>
-            </div>
-
-            <p>Time: </p>
-        </div>
-
-        <div class="todo">
-            <div class="head">
-                <div class="tile">
-                    <h3>Todo Title</h3>
-                </div>
-                <div class="action">
-                    <a href="#"><i class="fa-solid fa-trash"></i></a>
-                    <a href="#"><i class="fa-solid fa-pen"></i></a>
-                </div>
-            </div>
-
-            <div class="todo_desc">
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Commodi autem repudiandae ducimus harum alias iure molestias neque. Unde, sunt recusandae.</p>
-            </div>
-
-            <p>Time: </p>
-        </div>
-
-        <div class="todo">
-            <div class="head">
-                <div class="tile">
-                    <h3>Todo Title</h3>
-                </div>
-                <div class="action">
-                    <a href="#"><i class="fa-solid fa-trash"></i></a>
-                    <a href="#"><i class="fa-solid fa-pen"></i></a>
-                </div>
-            </div>
-
-            <div class="todo_desc">
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Commodi autem repudiandae ducimus harum alias iure molestias neque. Unde, sunt recusandae.</p>
-            </div>
-
-            <p>Time: </p>
-        </div>
-
-        <div class="todo">
-            <div class="head">
-                <div class="tile">
-                    <h3>Todo Title</h3>
-                </div>
-                <div class="action">
-                    <a href="#"><i class="fa-solid fa-trash"></i></a>
-                    <a href="#"><i class="fa-solid fa-pen"></i></a>
-                </div>
-            </div>
-
-            <div class="todo_desc">
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Commodi autem repudiandae ducimus harum alias iure molestias neque. Unde, sunt recusandae.</p>
-            </div>
-
-            <p>Time: </p>
-        </div> -->
-
-
-    </section>
-    <!-- todo list end -->
-
 
 
     <script src="./js/script.js"></script>
@@ -410,6 +257,7 @@ if(isset($_GET['dlTodo'])){
             todo_form.classList.toggle("form_show");
         })
     </script>
+
 
 </body>
 
