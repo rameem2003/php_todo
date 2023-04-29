@@ -53,6 +53,7 @@ header .sub_menu_open{
     display: block !important;
     border-radius: 8px;
     visibility: hidden;
+    z-index: 999;
 }
 
 header .sub_menu_open.active {

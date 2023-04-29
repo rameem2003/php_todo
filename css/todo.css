@@ -1,0 +1,87 @@
+.todo_list{
+    width: 90%;
+    margin: 0 auto;
+    /* background-color: red; */
+    min-height: 80vh;
+    position: relative;
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+}
+
+.add_new_todo_screen{
+    width: 80%;
+    height: 20%;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    padding: 50px 0;
+    border: 2px dashed white;
+    cursor: pointer;
+    /* display: none; */
+}
+
+.add_new_todo_screen .plus{
+    height: 100px;
+    width: 100px;
+    background-color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 30px;
+}
+
+.add_new_todo_screen .plus i{
+    font-size: 50px;
+}
+.add_new_todo_screen h1{
+    font-size: 40px;
+    color: white;
+}
+
+.todo_list #add_todo{
+    height: 50px;
+    width: 50px;
+    border-radius: 50%;
+    background-color: yellow;
+    border: none;
+    outline: none;
+    font-size: 30px;
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+    cursor: pointer;
+}
+
+.todo_list .todo{
+    background-color: white;
+    width: 28%;
+    margin: 20px;
+    padding: 10px;
+    border-radius: 8px;
+}
+
+.todo .head{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.todo .head h3{
+    font-size: 25px;
+}
+
+.todo .head .action a{
+    font-size: 20px;
+    color: black;
+    margin: 0 10px;
+}
+
+.todo .todo_desc p{
+    font-weight: bold;
+    margin: 20px 0;
+}
