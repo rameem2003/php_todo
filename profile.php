@@ -74,6 +74,7 @@ if(isset($_GET['dlTodo'])){
     $todoId = $_GET['dlTodo'];
     $delete_todo = "DELETE FROM `todo_table` WHERE id = '$todoId'";
     mysqli_query($conn, $delete_todo);
+    header('location:profile.php');
 }
 
 ?>

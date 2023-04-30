@@ -67,6 +67,20 @@ if(mysqli_num_rows($todo_query_run) > 0){
     $view_todo = mysqli_fetch_assoc($todo_query_run);
 }
 
+// update todo
+if(isset($_POST['updateTodo'])){
+    $new_todo_title = $_POST['todo_title'];
+    $new_todo_desc = $_POST['todo_desc'];
+    $new_todo_date = $_POST['date'];
+
+
+    $update_todo = "UPDATE `todo_table` SET todo_title='$new_todo_title',todo_desc='$new_todo_desc',todo_date='$new_todo_date' WHERE id = '$todo_id'";
+
+    if(mysqli_query($conn, $update_todo)){
+        header('location:profile.php');
+    }
+}
+
 
 ?>
 <!DOCTYPE html>
@@ -169,17 +183,17 @@ if(mysqli_num_rows($todo_query_run) > 0){
             </div>
 
             <div class="input_box">
-                <textarea name="todo_desc" placeholder="Write Your Todo" id="" cols="30" rows="10" value="<?php echo $view_todo['todo_desc'] ?>" required></textarea>
+                <textarea name="todo_desc" placeholder="Write Your Todo" id="" cols="30" rows="10" value="" required><?php echo $view_todo['todo_desc'] ?></textarea>
             </div>
 
             <div class="input_box">
-                <input type="date" name="date" id="" value="<?php echo $view_todo['todo_date'] ?>">
+                <input type="date" name="date" id="" value="<?php echo date("Y-m-d"); ?>">
             </div>
 
 
 
 
-            <button type="submit" name="upload" id="actionBtn">Update TODO</button>
+            <button type="submit" name="updateTodo" id="actionBtn">Update TODO</button>
         </form>
     </div>
 
