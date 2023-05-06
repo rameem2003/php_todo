@@ -11,11 +11,22 @@ header .container{
 
 header .container .logo{
     width: 30%;
+    position: relative;
 }
 
 header .container .logo h1{
     font-size: 50px;
     color: white;
+}
+
+header .container .logo span{
+    position: absolute;
+    top: 9px;
+    right: 194px;
+    color: black;
+    background-color: yellow;
+    padding: 5px;
+    border-radius: 8px;
 }
 
 header .container .menu{

@@ -68,6 +68,7 @@ if (isset($_POST['register'])) {
         <div class="container">
             <div class="logo">
                 <h1>TODO</h1>
+                <span>BETA</span>
             </div>
 
             <div class="menu">
