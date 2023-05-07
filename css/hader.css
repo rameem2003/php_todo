@@ -22,7 +22,8 @@ header .container .logo h1{
 header .container .logo span{
     position: absolute;
     top: 9px;
-    right: 194px;
+    /* right: 194px; */
+    left: 145px;
     color: black;
     background-color: yellow;
     padding: 5px;
