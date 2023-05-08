@@ -116,9 +116,9 @@ if (isset($_POST['register'])) {
 
 
                         <div class="input_box">
-                            <input type="password" name="login_pass" id="" placeholder="Password">
+                            <input type="password" name="login_pass" id="password" placeholder="Password">
                             <i class="fa-solid fa-lock"></i>
-                            <i class="fa-solid fa-eye tog"></i>
+                            <i class="fa-solid fa-eye tog" id="tog"></i>
                         </div>
 
                         <button type="submit" name="login">Login</button>
@@ -159,6 +159,9 @@ if (isset($_POST['register'])) {
 
     <script src="./js/script.js"></script>
     <script>
+
+        const password = document.getElementById("password");
+        const tog = document.getElementById("tog");
         const new_pass = document.getElementById("new_pass");
         const con_new_pass = document.getElementById("con_new_pass");
         const new_pass_tog = document.getElementById("new_pass_tog");
@@ -184,6 +187,17 @@ if (isset($_POST['register'])) {
 
 
         // password show/hide
+        tog.addEventListener("click", () => {
+            if (password.type === "password") {
+                password.type = "text";
+                tog.classList.replace("fa-eye", "fa-eye-slash")
+            } else {
+                password.type = "password";
+                tog.classList.replace("fa-eye-slash", "fa-eye")
+            }
+        })
+
+
         new_pass_tog.addEventListener("click", () => {
             if (new_pass.type === "password") {
                 new_pass.type = "text";
