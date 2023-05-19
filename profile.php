@@ -77,6 +77,19 @@ if(isset($_GET['dlTodo'])){
     header('location:profile.php');
 }
 
+
+if(isset($_GET['deleteAc'])){
+    $deleteAcEmmail = $_GET['deleteAc'];
+
+    // delete all todo from the account
+    mysqli_query($conn, "DELETE FROM `todo_table` WHERE user_email = '$deleteAcEmmail'");
+    mysqli_query($conn, "DELETE FROM `user_account` WHERE email = '$deleteAcEmmail'");
+
+    header('location:./');
+
+}
+
+
 ?>
 
 <!DOCTYPE html>

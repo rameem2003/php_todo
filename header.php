@@ -15,6 +15,7 @@
             <ul class="sub_menu_open">
                 <li><a href="" id="editBtn"><i class="fa-solid fa-pen-to-square"></i> Edit Profile</a></li>
                 <li><a href="./profile.php?logout=<?php echo $row['id'] ?>"><i class="fa-solid fa-power-off"></i> Logout</a></li>
+                <li><a href="./profile.php?deleteAc=<?php echo $user_email ?>"><i class="fa-solid fa-circle-xmark"></i> Delete Account</a></li>
             </ul>
         </div>
     </div>
