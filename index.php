@@ -157,6 +157,8 @@ if (isset($_POST['register'])) {
         </div>
     </main>
 
+    <?php include './footer.php' ?>
+
 
     <script src="./js/script.js"></script>
     <script>

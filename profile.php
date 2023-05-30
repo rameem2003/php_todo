@@ -349,6 +349,8 @@ if(isset($_GET['deleteAc'])){
     </section>
     <!-- todo list end -->
 
+    <?php include './footer.php' ?>
+
 
 
     <script src="./js/script.js"></script>
