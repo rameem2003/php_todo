@@ -1,10 +1,13 @@
 const switchBtn = document.querySelectorAll(".button button");
 const form_login = document.getElementById("form_login");
 const form_register = document.getElementById("form_register");
+
+const menu_tog = document.getElementById("menu_tog");
+const menu = document.querySelector(".menu");
 console.log(switchBtn);
 
 
-// login / registrayion switch
+// login / registration switch
 switchBtn.forEach(option => {
     option.addEventListener("click", () => {
         document.querySelector(".button .active").classList.remove("active");
@@ -23,4 +26,12 @@ switchBtn.forEach(option => {
 })
 
 
-// update form hide / show
+// menu toggle
+menu_tog.addEventListener("click", () => {
+    menu.classList.toggle("open_menu")
+})
+
+menu.addEventListener("click", () => {
+    menu.classList.remove("open_menu");
+})
+

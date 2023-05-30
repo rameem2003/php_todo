@@ -85,3 +85,19 @@
     font-weight: bold;
     margin: 20px 0;
 }
+
+
+@media screen and (max-width: 500px) {
+    .add_new_todo_screen{
+        width: 90%;
+    }
+    .todo_list{
+        min-height: 90vh;
+        display: block;
+    }
+
+    .todo_list .todo{
+        width: 95%;
+        margin: 20px auto;
+    }
+}

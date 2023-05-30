@@ -14,6 +14,13 @@ header .container .logo{
     position: relative;
 }
 
+header .container .logo i{
+    display: none;
+    font-size: 40px;
+    color: white;
+    cursor: pointer;
+}
+
 header .container .logo h1{
     font-size: 50px;
     color: white;
@@ -35,6 +42,7 @@ header .container .menu{
     display: flex;
     align-items: center;
     justify-content: flex-end;
+    transition: 0.5 linear;
 }
 
 header .container .menu ul{
@@ -74,4 +82,70 @@ header .sub_menu_open.active {
 
 header .menu .sub_menu_open li a{
     color: black !important;
+}
+
+
+@media screen and (max-width: 500px) {
+    header .container{
+        display: block;
+    }
+
+    header .container .logo{
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    header .container .logo h1{
+        display: inline-block;
+    }
+
+    header .container .logo i{
+        display: block;
+    }
+
+    header .container .menu{
+        display: block;
+        padding: 20px;
+        width: 80%;
+        height: 100vh;
+        position: absolute;
+        top: 62px;
+        left: -100%;
+        background-color: #1D3578;
+        z-index: 10000;
+        transition: 0.5s linear;
+    }
+
+    header .container .menu.open_menu{
+        left: 0;
+    }
+    header .container .menu ul{
+        display: block;
+        width: 100%;
+    }
+
+    header .container .menu ul li a{
+        font-size: 30px;
+    }
+
+    header .menu .sub_menu_open{
+        position: static;
+        background-color: transparent;
+        margin: 20px 0;
+        padding: 0;
+        visibility: visible;
+    }
+
+    header .menu .sub_menu_open li{
+        color: white;
+        font-size: 20px;
+        margin: 10px 0;
+    }
+
+    header .menu .sub_menu_open li a{
+        color: white !important;
+        font-size: 20px !important;
+    }
 }

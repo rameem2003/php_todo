@@ -80,3 +80,10 @@
   cursor: pointer;
   /* pointer-events: all; */
 }
+
+
+@media screen and (max-width: 500px) {
+  .form_box{
+    width: 95%;
+  }
+}

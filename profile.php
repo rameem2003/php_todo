@@ -359,6 +359,7 @@ if(isset($_GET['deleteAc'])){
         const con_new_pass_tog = document.getElementById("con_new_pass_tog");
         const actionBtn = document.getElementById("actionBtn");
 
+
         // check password match or not
         con_new_pass.addEventListener("keyup", () => {
             let password = new_pass.value;
