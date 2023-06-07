@@ -6,6 +6,10 @@ session_start();
 // user show
 $user_id = $_SESSION['id'];
 
+if(!isset($user_id)){
+    header('location:./');
+}
+
 $load_user = "SELECT * FROM `user_account` WHERE id = '$user_id'";
 $run_load_user = mysqli_query($conn, $load_user);
 
