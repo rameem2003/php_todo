@@ -138,6 +138,16 @@ main .container .right{
     height: 50px;
 }
 
+footer{
+    width: 100%;
+    background-color: white;
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    text-align: center;
+    font-weight: bold;
+}
+
 
 @media screen and (max-width: 500px) {
     main .container{

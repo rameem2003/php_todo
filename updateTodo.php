@@ -202,6 +202,8 @@ if(isset($_POST['updateTodo'])){
     </div>
 
 
+    <?php include './footer.php' ?>
+
     <script src="./js/script.js"></script>
     <script>
         const new_pass = document.getElementById("new_pass");
